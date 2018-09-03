@@ -34,7 +34,8 @@ func main() {
 		if err3 != nil {
 			log.Fatal("Ops..")
 		} else {
-			log.Println(m[0])
+            for _, avg := range m {
+                log.Println(avg.Name)}
 		}
 	}
 }
