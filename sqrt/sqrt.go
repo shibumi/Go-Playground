@@ -12,7 +12,7 @@ func Sqrt(x float64, d float64) (z float64) {
 	y := z * 2
 	for math.Abs(z-y) > d {
 		y = z
-		z = z - ((math.Pow(z, 2) - x) / 2 * z)
+		z = z - ((math.Pow(z, 2) - x) / (2 * z))
 	}
 	return z
 }
