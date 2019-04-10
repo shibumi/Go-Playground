@@ -54,6 +54,8 @@ func kthSmallest(candidates []int, left int, right int, k int) int {
 
 // This is a quickselect implementation.
 // See also: https://www.geeksforgeeks.org/quickselect-algorithm/
+// Best case: O(n)
+// Worst case: O(n^2)
 func main() {
 	candidates := []int{1, 6, 77, 4, 7, 15, 22, 0, 54}
 	//partition(candidates, 0, 8)
