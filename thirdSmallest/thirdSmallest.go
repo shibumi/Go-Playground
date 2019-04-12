@@ -9,7 +9,6 @@ func thirdSmallest(candidates []int) int {
 		return 0
 	}
 	for _, numb := range candidates {
-		fmt.Println("Number ", numb)
 		switch {
 		case len(comparingSet) == 1:
 			if numb < comparingSet[0] {
@@ -42,7 +41,6 @@ func thirdSmallest(candidates []int) int {
 			comparingSet = append(comparingSet, numb)
 		}
 	}
-	fmt.Println(comparingSet)
 	return comparingSet[2]
 }
 
