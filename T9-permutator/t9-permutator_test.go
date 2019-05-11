@@ -1,4 +1,4 @@
-package T9_permutator
+package main
 
 import (
 	"reflect"

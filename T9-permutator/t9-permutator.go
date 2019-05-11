@@ -1,7 +1,9 @@
-package T9_permutator
+package main
+
+import "fmt"
 
 var T9 = map[int]string{
-	1: "",
+	1: "_",
 	2: "ABC",
 	3: "DEF",
 	4: "GHI",
@@ -12,32 +14,21 @@ var T9 = map[int]string{
 	9: "WXYZ",
 	0: "+"}
 
-func T9Permutator(numberblock []int) (result []string) {
-	return result
+func T9Permutator(numberblock []int) (results []string) {
+	for index, value := range numberblock {
+		for _, charvalue := range T9[value] {
+			if index == 0 {
+				results = append(results, string(charvalue))
+			} else {
+				// TODO Fix T9Permutator
+			}
+
+		}
+	}
+	fmt.Println(results)
+	return results
 }
 
 func main() {
 	T9Permutator([]int{2, 2})
 }
-
-//TODO Heap's Algorithm
-////i acts similarly to the stack pointer
-//i := 0;
-//while i < n do
-//if  c[i] < i then
-//if i is even then
-//swap(A[0], A[i])
-//else
-//swap(A[c[i]], A[i])
-//end if
-//output(A)
-////Swap has occurred ending the for-loop. Simulate the increment of the for-loop counter
-//c[i] += 1
-////Simulate recursive call reaching the base case by bringing the pointer to the base case analog in the array
-//i := 0
-//else
-////Calling generate(i+1, A) has ended as the for-loop terminated. Reset the state and simulate popping the stack by incrementing the pointer.
-//c[i] := 0
-//i += 1
-//end if
-//end while
