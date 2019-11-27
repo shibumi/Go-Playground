@@ -26,18 +26,16 @@ func Convert(input []string) (output [][]uint64) {
 
 // NumberInSlice checks if a number exists in all Slices in a Slice
 func NumberInSlice(number uint64, lists [][]uint64) (result bool) {
-	var counter uint
-	var counterSlices uint
 	for _, list := range lists {
+		ok := false
 		for _, e := range list {
 			if number == e {
-				counter++
+				ok = true
 			}
 		}
-		counterSlices++
-	}
-	if counter != counterSlices {
-		return false
+		if !ok {
+			return false
+		}
 	}
 	return true
 }
