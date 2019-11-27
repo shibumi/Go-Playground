@@ -16,6 +16,22 @@ import (
 // 	}
 // }
 
+func TestNumberInSlice(t *testing.T) {
+	correctTables := []struct {
+		number uint64
+		lists  [][]uint64
+		result bool
+	}{
+		{1, [][]uint64{{1, 2, 3, 4}, {1, 5, 6, 7, 8}}, true},
+	}
+	for _, table := range correctTables {
+		result := NumberInSlice(table.number, table.lists)
+		if result != table.result {
+			t.Errorf("Incorrect result for number: %v in lists %v, got: %v, want: %v", table.number, table.lists, result, table.result)
+		}
+	}
+}
+
 func TestConvert(t *testing.T) {
 	correctTables := []struct {
 		input  []string
