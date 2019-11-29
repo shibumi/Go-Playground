@@ -5,16 +5,36 @@ import (
 	"testing"
 )
 
-// func TestFindIntersection(t *testing.T) {
-// 	correctTables := []struct {
-// 		input  []string
-// 		result string
-// 	}{
-// 		{[]string{"1, 2, 3, 4", "1, 2, 3, 4, 5"}, "1, 2, 3, 4"},
-// 		{[]string{"1, 3, 4, 7, 13", "1, 2, 4, 13, 15"}, "1, 4, 13"},
-// 		{[]string{"1, 2, 6", "1, 5, 7", "1, 4, 8"}, "1"},
-// 	}
-// }
+func TestUintSliceToString(t *testing.T) {
+	correctTables := []struct {
+		input  []uint64
+		result string
+	}{
+		{[]uint64{1, 2, 3, 4}, "1, 2, 3, 4"},
+	}
+	for _, table := range correctTables {
+		if result := UintSliceToString(table.input); result != table.result {
+			t.Errorf("Incorrect result for input: %v, got: %v, want: %v", table.input, result, table.result)
+		}
+	}
+}
+
+func TestFindIntersection(t *testing.T) {
+	correctTables := []struct {
+		input  []string
+		result string
+	}{
+		{[]string{"1, 2, 3, 4", "1, 2, 3, 4, 5"}, "1, 2, 3, 4"},
+		{[]string{"1, 3, 4, 7, 13", "1, 2, 4, 13, 15"}, "1, 4, 13"},
+		{[]string{"1, 2, 6", "1, 5, 7", "1, 4, 8"}, "1"},
+	}
+	for _, table := range correctTables {
+		result := FindIntersection(table.input)
+		if result != table.result {
+			t.Errorf("Incorrect result for input: %v, got: %v, want: %v", table.input, result, table.result)
+		}
+	}
+}
 
 func TestNumberInSlice(t *testing.T) {
 	correctTables := []struct {

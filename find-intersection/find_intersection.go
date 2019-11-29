@@ -25,6 +25,7 @@ func Convert(input []string) (output [][]uint64) {
 }
 
 // NumberInSlice checks if a number exists in all Slices in a Slice
+// This has a runtime of O(nm)
 func NumberInSlice(number uint64, lists [][]uint64) (result bool) {
 	for _, list := range lists {
 		ok := false
@@ -40,10 +41,39 @@ func NumberInSlice(number uint64, lists [][]uint64) (result bool) {
 	return true
 }
 
-func findIntersection(input []string) (output string) {
-	return "test"
+// UintSliceToString converts a slice of uints to a string with "," separators.
+func UintSliceToString(input []uint64) (output string) {
+	for i, e := range input {
+		output += strconv.FormatUint(e, 10)
+		if i < len(input)-1 {
+			output += ", "
+		}
+	}
+	return output
+}
+
+// FindIntersection calculates the intersection for slices of numbers.
+func FindIntersection(input []string) (output string) {
+	lists := Convert(input)
+	var outputAsList []uint64
+	for _, list := range lists {
+		for _, number := range list {
+			if NumberInSlice(number, lists) {
+				var inSlice bool
+				for _, n := range outputAsList {
+					if n == number {
+						inSlice = true
+					}
+				}
+				if !inSlice {
+					outputAsList = append(outputAsList, number)
+				}
+			}
+		}
+	}
+	return UintSliceToString(outputAsList)
 }
 
 func main() {
-	fmt.Println(findIntersection([]string{"1, 2, 3, 4", "1, 3, 4"}))
+	fmt.Println(FindIntersection([]string{"1, 2, 3, 4", "1, 3, 4"}))
 }
