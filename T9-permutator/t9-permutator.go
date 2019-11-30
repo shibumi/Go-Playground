@@ -20,7 +20,7 @@ func T9Permutator(numberblock []int) (results []string) {
 			if index == 0 {
 				results = append(results, string(charvalue))
 			} else {
-				// TODO Fix T9Permutator
+				results[index] += string(charvalue)
 			}
 
 		}

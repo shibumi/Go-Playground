@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -74,6 +75,32 @@ func FindIntersection(input []string) (output string) {
 	return UintSliceToString(outputAsList)
 }
 
+// FindIntersectionPerformance should be smaller and perform better than the other functions in this file. Runtime should be O(n).
+func FindIntersectionPerformance(input []string) (output string) {
+	dict := make(map[string]uint64)
+	for _, s := range input {
+		chars := strings.Split(s, ", ")
+		for _, char := range chars {
+			dict[char]++
+		}
+	}
+	// We need this work around to generate a sorted output string.
+	// golang maps are unsorted, therefore we would generate different output strings on every run.
+	sortedKeyList := make([]string, len(dict))
+	for k := range dict {
+		sortedKeyList = append(sortedKeyList, k)
+	}
+	sort.Strings(sortedKeyList)
+	for _, k := range sortedKeyList {
+		if dict[k] == uint64(len(input)) {
+			output += k + ", "
+		}
+	}
+	// We need to trim the last comma and whitespace from the string.
+	output = strings.TrimSuffix(output, ", ")
+	return output
+}
+
 func main() {
-	fmt.Println(FindIntersection([]string{"1, 2, 3, 4", "1, 3, 4"}))
+	fmt.Println(FindIntersectionPerformance([]string{"1, 2, 3, 4", "1, 3, 4"}))
 }
