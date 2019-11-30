@@ -90,7 +90,14 @@ func FindIntersectionPerformance(input []string) (output string) {
 	for k := range dict {
 		sortedKeyList = append(sortedKeyList, k)
 	}
-	sort.Strings(sortedKeyList)
+	// We need to sort with this inline function.
+	// If we would use sort.Strings() we would get strings such as "1, 13, 4".
+	// But we want to sort them by the weight of the number.
+	sort.Slice(sortedKeyList, func(i, j int) bool {
+		numA, _ := strconv.Atoi(sortedKeyList[i])
+		numB, _ := strconv.Atoi(sortedKeyList[j])
+		return numA < numB
+	})
 	for _, k := range sortedKeyList {
 		if dict[k] == uint64(len(input)) {
 			output += k + ", "
@@ -101,6 +108,12 @@ func FindIntersectionPerformance(input []string) (output string) {
 	return output
 }
 
+// The challenge is the following:
+// We get as input a slice of strings with sorted numbers.
+// We want as output a string with the intersection of these slices.
+// The major challenge is the intersection algorithm.
+// The side quest is the input/output handling, as we get strings and not
+// integers (what would make this challenge a lot easier).
 func main() {
 	fmt.Println(FindIntersectionPerformance([]string{"1, 2, 3, 4", "1, 3, 4"}))
 }
