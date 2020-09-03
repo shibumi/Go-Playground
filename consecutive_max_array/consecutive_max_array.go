@@ -17,33 +17,33 @@ func calcDifference(x uint, y uint) uint {
 }
 
 func algorithmicArray(input []uint) (solution []uint) {
-	hashMap := map[uint][]uint{}
-	var difference uint
-	difference = 0
-	hashMap[difference] = []uint{}
-	for i := 0; i < len(input); i++ {
-		result := uint(0)
-		if i == len(input)-1 {
-			result = calcDifference(input[i], input[i-1])
+	if len(input) < 2 {
+		return []uint{}
+	}
+	var last uint
+	currentChain := []uint{}
+	for i := 0; i < len(input)-1; i++ {
+		result := calcDifference(input[i], input[i+1])
+		if len(currentChain) == 0 {
+			currentChain = append(currentChain, input[i], input[i+1])
+			last = result
 		} else {
-			result = calcDifference(input[i], input[i+1])
+			if result != last {
+				currentChain = []uint{}
+				currentChain = append(currentChain, input[i], input[i+1])
+				last = result
+				continue
+			}
+			currentChain = append(currentChain, input[i+1])
 		}
-		hashMap[result] = append(hashMap[result], input[i])
-	}
-	var result uint
-	result = 0
-	var key uint
-	for k, v := range hashMap {
-		if result < uint(len(v)) {
-			result = uint(len(v))
-			key = k
+		if len(currentChain) > len(solution) {
+			solution = currentChain
 		}
 	}
-	return hashMap[key]
+	return
 }
 
 func main() {
-	//algorithmicArray([]uint{10, 7, 4, 6, 8, 10, 11})
 	scanner := bufio.NewScanner(os.Stdin)
 	// just scan first line to get number of tests
 	scanner.Scan()
