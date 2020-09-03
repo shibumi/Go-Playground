@@ -9,13 +9,6 @@ import (
 	"strings"
 )
 
-func calcDifference(x uint, y uint) uint {
-	if x >= y {
-		return x - y
-	}
-	return y - x
-}
-
 func algorithmicArray(input []uint) (solution []uint) {
 	if len(input) < 2 {
 		return []uint{}
@@ -23,7 +16,7 @@ func algorithmicArray(input []uint) (solution []uint) {
 	var last uint
 	currentChain := []uint{}
 	for i := 0; i < len(input)-1; i++ {
-		result := calcDifference(input[i], input[i+1])
+		result := input[i] - input[i+1]
 		if len(currentChain) == 0 {
 			currentChain = append(currentChain, input[i], input[i+1])
 			last = result
