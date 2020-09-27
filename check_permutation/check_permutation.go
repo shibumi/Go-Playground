@@ -2,6 +2,8 @@ package check_permutation
 
 import "reflect"
 
+// The problem: We want to check if two strings
+// are permutations from each other.
 // Time complexity O(n) or better: O(2n)
 // Space complexity  O(n)
 // This solution is not so good, because it repeats code...
@@ -23,18 +25,3 @@ func checkPermutation(str1, str2 string) bool {
 	}
 	return false
 }
-
-// first draft of support for more input strings
-// func checkPermutations(str...) bool {
-// 	var length uint
-// 	for i, s := range str {
-// 		if i == 0 {
-// 			length = len(s)
-// 		} else {
-// 			if len(s) != length {
-// 				return false
-// 			}
-// 		}
-// 	}
-
-// }
